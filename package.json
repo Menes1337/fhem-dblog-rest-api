@@ -1,0 +1,33 @@
+{
+  "name": "fhem-dblog-rest-api",
+  "version": "0.1.0",
+  "description": "FHEM rest API for dblog",
+  "scripts": {
+    "test": "mocha --use_strict --require ../test/setup.js --recursive ./test -R",
+    "test:integration": "mocha --use_strict --timeout 3000 --require ./test/setup.js --recursive ./test/integration",
+    "test:unit": "mocha --use_strict --require ./test/setup.js --recursive ./test/integration",
+    "cover": "istanbul cover --dir ./coverage _mocha -- --require ./test/setup.js --recursive ./test/unit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.localdev.cc:7999/Menes1337/fhem-dblog-rest-api.git"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.12.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "process": "^0.11.0"
+  },
+  "standard": {
+    "env": {
+      "mocha": true
+    }
+  }
+}
