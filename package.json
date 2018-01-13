@@ -3,38 +3,58 @@
   "version": "0.1.0",
   "description": "FHEM rest API for dblog",
   "scripts": {
-    "precommit": "npm run test && npm run lint-staged",
+    "precommit": "gulp && lint-staged && npm run test",
+    "gulp": "gulp",
+    "tsc": "tsc",
     "test": "mocha --use_strict --require ./test/setup.js --recursive ./test",
     "test:integration": "mocha --use_strict --timeout 3000 --require ./test/setup.js --recursive ./test/integration",
     "test:unit": "mocha --use_strict --require ./test/setup.js --recursive ./test/integration",
     "cover": "istanbul cover --dir ./coverage _mocha -- --require ./test/setup.js --recursive ./test/unit",
     "lint": "standard",
+    "lint-typescript": "tslint --project tsconfig.json",
     "lint-staged": "lint-staged",
-    "check": "nsp check"
+    "check": "nsp check",
+    "start": "node ./node_modules/nodemon/bin/nodemon.js --inspect lib/app.js"
   },
   "lint-staged": {
-    "*.js": "npm run lint"
+    "*.js": "lint",
+    "*.ts": "lint-typescript"
   },
   "repository": {
     "type": "git",
     "url": "ssh://git@stash.localdev.cc:7999/Menes1337/fhem-dblog-rest-api.git"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "basic-auth": "^2.0.0",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
+  },
   "devDependencies": {
+    "@types/express": "^4.11.0",
+    "@types/node": "^9.3.0",
     "eslint": "^4.12.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-typescript": "^0.8.1",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.3",
+    "gulp-standard": "^10.1.1",
+    "gulp-typescript": "^4.0.0-alpha.1",
     "husky": "^0.14.3",
     "istanbul": "^0.4.5",
     "lint-staged": "^6.0.0",
     "mocha": "^3.2.0",
+    "nodemon": "^1.14.10",
     "nsp": "^3.1.0",
     "process": "^0.11.0",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.6.2"
   },
   "standard": {
     "env": {
