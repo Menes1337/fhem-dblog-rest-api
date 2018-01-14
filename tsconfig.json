@@ -8,10 +8,14 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "sourceMap": true,
+    "inlineSources": true,
     "strictNullChecks": true
   },
   "include": [
     "./src/**/*"
+  ],
+  "files": [
+    "./node_modules/@types/node/index.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -5,16 +5,17 @@
   "scripts": {
     "precommit": "gulp && lint-staged && npm run test",
     "gulp": "gulp",
-    "tsc": "tsc",
+    "tsc": "tsc --p tsconfig.json",
     "test": "mocha --use_strict --require ./test/setup.js --recursive ./test",
     "test:integration": "mocha --use_strict --timeout 3000 --require ./test/setup.js --recursive ./test/integration",
     "test:unit": "mocha --use_strict --require ./test/setup.js --recursive ./test/integration",
     "cover": "istanbul cover --dir ./coverage _mocha -- --require ./test/setup.js --recursive ./test/unit",
-    "lint": "standard",
+    "lint": "eslint",
+    "eslint": "eslint lib",
     "lint-typescript": "tslint --project tsconfig.json",
     "lint-staged": "lint-staged",
     "check": "nsp check",
-    "start": "node ./node_modules/nodemon/bin/nodemon.js --inspect lib/app.js"
+    "start": "gulp && node ./node_modules/nodemon/bin/nodemon.js --inspect lib/app.js"
   },
   "lint-staged": {
     "*.js": "lint",
@@ -28,21 +29,21 @@
   "dependencies": {
     "basic-auth": "^2.0.0",
     "express": "^4.16.2",
-    "mysql": "^2.15.0"
+    "mysql2": "^1.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.11.0",
+    "@types/mysql2": "github:types/mysql2",
     "@types/node": "^9.3.0",
-    "eslint": "^4.12.1",
-    "eslint-config-standard": "^10.2.1",
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-typescript": "^0.8.1",
     "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.1",
     "gulp-sourcemaps": "^2.6.3",
-    "gulp-standard": "^10.1.1",
     "gulp-typescript": "^4.0.0-alpha.1",
     "husky": "^0.14.3",
     "istanbul": "^0.4.5",
@@ -55,10 +56,5 @@
     "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0",
     "typescript": "^2.6.2"
-  },
-  "standard": {
-    "env": {
-      "mocha": true
-    }
   }
 }

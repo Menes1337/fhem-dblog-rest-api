@@ -1,19 +1,17 @@
 const gulp = require('gulp')
 const ts = require('gulp-typescript')
 const tsProject = ts.createProject('tsconfig.json')
-const standard = require('gulp-standard')
 const sourcemaps = require('gulp-sourcemaps')
+// const eslint = require('gulp-eslint')
 
-const jsFolder = './lib'
+const jsFolder = 'lib'
 
 gulp.task('default', function () {
   return tsProject.src()
     .pipe(sourcemaps.init())
     .pipe(tsProject())
     .js
-    .pipe(standard({
-      fix: true
-    }))
-    .pipe(sourcemaps.write({sourceRoot: '/lib'}))
+    // sourcemap probably not supported: .pipe(eslint({fix: true}))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(jsFolder))
 })

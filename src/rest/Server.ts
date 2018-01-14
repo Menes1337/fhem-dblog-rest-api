@@ -1,30 +1,32 @@
+import express = require('express')
+
 const PORT_NUMBER = 3000
 
 class Server {
-  private expressApp: any
+  private expressApp: express.Application
 
   /**
-   * @param {Application} expressApp
+   * @param {express.Application} expressApp
    */
-  constructor (expressApp: any) {
+  constructor (expressApp: express.Application) {
     this.expressApp = expressApp
   }
 
   /**
-   * @param {null|int} port
+   * @param {null|number} port
    */
-  listen (port: number) {
+  listen (port: number | null) {
     this.expressApp.listen(port || PORT_NUMBER)
     console.log('todo list RESTful API Server started on: ' + port || PORT_NUMBER)
   }
 
   /**
    * @param {string} path
-   * @param {Router} router
+   * @param {express.Router} router
    */
-  applyRouter (path: string, router: any) {
+  applyRouter (path: string, router: express.Router) {
     this.expressApp.use(path, router)
   }
 }
 
-module.exports = Server
+export = Server
