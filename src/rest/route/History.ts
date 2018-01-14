@@ -24,7 +24,7 @@ class RESTRouteHistory {
    * @param {RequestGetList} request
    * @param {express.Response} response
    */
-  async getList (request: RequestGetList, response: express.Response) {
+  async getList (request: RequestGetList, response: express.Response): Promise<void> {
 
     const histories: ReadModelHistory[] = await this.dataSource.loadHistories(
       new Timestamp(Number.parseInt(request.query.from)),

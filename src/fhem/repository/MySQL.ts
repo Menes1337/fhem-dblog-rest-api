@@ -27,18 +27,23 @@ namespace FHEM.Repository {
       let result: Array<ResultSet>
       let columns: Array<ResultSet>
       [result, columns] = await this.connection.execute('SELECT * FROM `current`') as Array<any>
+
       return result.map((result) => {
         return new ReadModelCurrent(result.TIMESTAMP.getTime(), result.DEVICE, result.TYPE, result.EVENT, result.READING, result.VALUE, result.UNIT)
       })
     }
 
     async loadHistories (from: Timestamp, to: Timestamp): Promise<ReadModelHistory[]> {
-      const result: any = await this.connection.execute(
+      let result: Array<ResultSet>
+      let columns: Array<ResultSet>
+      [result, columns] = await this.connection.execute(
         'SELECT * FROM history WHERE TIMESTAMP >= ? AND TIMESTAMP <= ?',
         [from.getValue().toString(), to.getValue().toString()]
-      )
+      ) as Array<any>
 
-      return [new ReadModelHistory(from.getValue(), '', '', '', '', '', '')]
+      return result.map((result) => {
+        return new ReadModelHistory(result.TIMESTAMP.getTime(), result.DEVICE, result.TYPE, result.EVENT, result.READING, result.VALUE, result.UNIT)
+      })
     }
   }
 

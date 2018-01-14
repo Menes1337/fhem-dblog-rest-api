@@ -19,12 +19,20 @@ const asyncCode: any = (async function () {
 
     const routeHistory = new RouteHistory(mySQLRepository)
     router.get('/history', authentication.authenticate, (req, res) => {
-      routeHistory.getList(req, res)
+      try {
+        routeHistory.getList(req, res).catch(() => console.log('done'))
+      } catch (err) {
+        console.log(err.message)
+      }
     })
 
     const routeCurrent = new RouteCurrent(mySQLRepository)
     router.get('/current', authentication.authenticate, (req, res) => {
-      routeCurrent.getList(req, res)
+      try {
+        routeCurrent.getList(req, res).catch(() => console.log('error'))
+      } catch (err) {
+        console.log(err.message)
+      }
     })
     router.get('/current/:device/:reading', authentication.authenticate, routeCurrent.getByDeviceReading)
 
@@ -34,4 +42,5 @@ const asyncCode: any = (async function () {
   } catch (error) {
     console.log(error.message)
   }
-})()
+})
+asyncCode()

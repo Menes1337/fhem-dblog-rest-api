@@ -16,7 +16,7 @@ class RESTRouteCurrent {
    * @param {express.Request} request
    * @param {express.Response} response
    */
-  async getList (request: express.Request, response: express.Response) {
+  async getList (request: express.Request, response: express.Response): Promise<void> {
     let latestCurrents: ReadModelCurrent[] = []
     try {
       latestCurrents = await this.dataSource.loadCurrents()
