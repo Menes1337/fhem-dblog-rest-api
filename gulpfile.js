@@ -12,6 +12,6 @@ gulp.task('default', function () {
     .pipe(tsProject())
     .js
     // sourcemap probably not supported: .pipe(eslint({fix: true}))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}))
     .pipe(gulp.dest(jsFolder))
 })

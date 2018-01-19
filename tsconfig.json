@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./lib",
+    "types": ["node", "mocha"],
     "allowJs": true,
     "noImplicitAny": true,
     "target": "es6",
@@ -9,10 +10,12 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "inlineSources": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "sourceRoot": "src"
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./test/**/*"
   ],
   "files": [
     "./node_modules/@types/node/index.d.ts"

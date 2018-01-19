@@ -2,6 +2,13 @@ import express = require('express')
 import DataSource = require('../../fhem/repository/provider/DataSource')
 import ReadModelCurrent = require('../../fhem/read_model/Current')
 
+interface RequestParameterDeviceReading extends express.Request {
+  params: {
+    device: string,
+    reading?: string
+  }
+}
+
 class RESTRouteCurrent {
   private dataSource: DataSource
 
@@ -29,11 +36,19 @@ class RESTRouteCurrent {
   }
 
   /**
-   * @param {express.Request} request
+   * @param {RequestParameterDeviceReading} request
    * @param {express.Response} response
    */
-  getByDeviceReading (request: express.Request, response: express.Response) {
-    response.send('getByDeviceReading required parameter: ' + request.params.device + request.params.reading)
+  async getByDeviceReading (request: RequestParameterDeviceReading, response: express.Response) {
+    let currents: ReadModelCurrent[] = []
+    try {
+      currents = await this.dataSource.loadCurrentsByDeviceAndReading(request.params.device, request.params.reading)
+    } catch (error) {
+      console.log(error)
+    }
+    response.send(currents.map(current => {
+      return current
+    }))
   }
 }
 

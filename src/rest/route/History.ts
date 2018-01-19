@@ -4,9 +4,13 @@ import Timestamp = require('../../fhem/value_object/Timestamp')
 import ReadModelHistory = require('../../fhem/read_model/History')
 
 interface RequestGetList extends express.Request {
-  query: {
+  params: {
     from: string,
     to: string
+  },
+  query: {
+    device?: string,
+    reading?: string
   }
 }
 
@@ -27,8 +31,8 @@ class RESTRouteHistory {
   async getList (request: RequestGetList, response: express.Response): Promise<void> {
 
     const histories: ReadModelHistory[] = await this.dataSource.loadHistories(
-      new Timestamp(Number.parseInt(request.query.from)),
-      new Timestamp(Number.parseInt(request.query.to))
+      new Timestamp(Number.parseFloat(request.params.from)),
+      new Timestamp(Number.parseFloat(request.params.to))
     )
 
     response.send(histories.map(history => {

@@ -5,6 +5,8 @@ import ReadModelCurrent = require('../../read_model/Current')
 interface DataSource {
   loadCurrents (): Promise<ReadModelCurrent[]>
 
+  loadCurrentsByDeviceAndReading (device: string, reading?: string): Promise<ReadModelCurrent[]>
+
   loadHistories (from: Timestamp, to: Timestamp): Promise<ReadModelHistory[]>
 }
 

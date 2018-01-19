@@ -4,3 +4,4 @@ coverage
 lib
 typings
 .mysql.credentials.js
+.vscode
