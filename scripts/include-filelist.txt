@@ -1,0 +1,5 @@
++ lib/***
++ node_modules/***
++ .basic-auth.credentials.js
++ .mysql.credentials.js
+- *

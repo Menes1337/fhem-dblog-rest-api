@@ -20,14 +20,14 @@ interface ResultSet {
 namespace FHEM.Repository {
 
   export class MySQL implements DataSource {
-    private _connection: MySQL2.Connection
+    private _connection: MySQL2.Pool
     private _queryBuilderFactory: QueryBuilderFactory
 
     /**
-     * @param {Connection} connection
+     * @param {Pool} connection
      * @param {QueryBuilderFactory} queryBuilderFactory
      */
-    constructor (connection: MySQL2.Connection, queryBuilderFactory: QueryBuilderFactory) {
+    constructor (connection: MySQL2.Pool, queryBuilderFactory: QueryBuilderFactory) {
       this._connection = connection
       this._queryBuilderFactory = queryBuilderFactory
     }
@@ -48,12 +48,16 @@ namespace FHEM.Repository {
     /**
      * @param {Timestamp} from
      * @param {Timestamp} to
+     * @param {string | null} device
+     * @param {string | null} reading
      * @returns {Promise<ReadModelHistory[]>}
      */
-    async loadHistories (from: Timestamp, to: Timestamp): Promise<ReadModelHistory[]> {
+    async loadHistories (from: Timestamp, to: Timestamp, device: string | null, reading: string | null): Promise<ReadModelHistory[]> {
       const queryBuilder = this._queryBuilderFactory.get(new Query('SELECT * FROM `history`'))
       queryBuilder.addQueryParameter(from.getValue() ? new QueryParameter('UNIX_TIMESTAMP(TIMESTAMP)', from.toSeconds().toString(), '>=', false) : null)
       queryBuilder.addQueryParameter(to.getValue() ? new QueryParameter('UNIX_TIMESTAMP(TIMESTAMP)', to.toSeconds().toString(), '<=', false) : null)
+      queryBuilder.addQueryParameter(device ? new QueryParameter('DEVICE', device, '=', false) : null)
+      queryBuilder.addQueryParameter(reading ? new QueryParameter('READING', reading, '=', false) : null)
 
       let result: Array<ResultSet>
       let columns: Array<ResultSet>

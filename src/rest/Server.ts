@@ -1,6 +1,6 @@
 import express = require('express')
 
-const PORT_NUMBER = 3000
+const PORT_NUMBER = 8337
 
 class Server {
   private expressApp: express.Application

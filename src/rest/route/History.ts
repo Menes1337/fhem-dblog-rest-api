@@ -32,7 +32,9 @@ class RESTRouteHistory {
 
     const histories: ReadModelHistory[] = await this.dataSource.loadHistories(
       new Timestamp(Number.parseFloat(request.params.from)),
-      new Timestamp(Number.parseFloat(request.params.to))
+      new Timestamp(Number.parseFloat(request.params.to)),
+      request.query.device ? request.query.device : null,
+      request.query.reading ? request.query.reading : null
     )
 
     response.send(histories.map(history => {

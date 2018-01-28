@@ -7,7 +7,7 @@ interface DataSource {
 
   loadCurrentsByDeviceAndReading (device: string, reading?: string): Promise<ReadModelCurrent[]>
 
-  loadHistories (from: Timestamp, to: Timestamp): Promise<ReadModelHistory[]>
+  loadHistories (from: Timestamp, to: Timestamp, device: string | null, reading: string | null): Promise<ReadModelHistory[]>
 }
 
 export = DataSource

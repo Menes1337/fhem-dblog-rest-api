@@ -15,7 +15,8 @@
     "lint-typescript": "tslint --project tsconfig.json",
     "lint-staged": "lint-staged",
     "check": "nsp check",
-    "start": "gulp && node ./node_modules/nodemon/bin/nodemon.js --inspect lib/app.js"
+    "start": "npm run gulp && node ./node_modules/nodemon/bin/nodemon.js --inspect lib/app.js",
+    "deploy": "npm run gulp && ./scripts/deployment.sh"
   },
   "lint-staged": {
     "*.js": "lint",
@@ -29,7 +30,8 @@
   "dependencies": {
     "basic-auth": "^2.0.0",
     "express": "^4.16.2",
-    "mysql2": "^1.5.1"
+    "mysql2": "^1.5.1",
+    "nodemon": "^1.14.10"
   },
   "devDependencies": {
     "@types/express": "^4.11.0",
@@ -51,7 +53,6 @@
     "istanbul": "^0.4.5",
     "lint-staged": "^6.0.0",
     "mocha": "^3.2.0",
-    "nodemon": "^1.14.10",
     "nsp": "^3.1.0",
     "process": "^0.11.0",
     "standard": "^10.0.3",

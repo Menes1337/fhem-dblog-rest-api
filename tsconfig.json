@@ -14,8 +14,7 @@
     "sourceRoot": "src"
   },
   "include": [
-    "./src/**/*",
-    "./test/**/*"
+    "./src/**/*"
   ],
   "files": [
     "./node_modules/@types/node/index.d.ts"
