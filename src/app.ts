@@ -14,8 +14,7 @@ const router = express.Router()
 const asyncCode: any = (async function () {
   const mySQLCredentials: MySQL2.ConnectionOptions = require('../.mysql.credentials')
   try {
-    const mysql: MySQL2.Pool = await MySQL2.createPool(mySQLCredentials)
-
+    const mysql: MySQL2.Pool = MySQL2.createPool(mySQLCredentials)
     const mySQLRepository = new MySQLRepository(mysql, new QueryBuilderFactory())
 
     const routeHistory = new RouteHistory(mySQLRepository)

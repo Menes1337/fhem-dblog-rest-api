@@ -5,10 +5,6 @@ class Timestamp {
    * @param {number} value
    */
   constructor (value: number) {
-    if (typeof value !== 'number') {
-      throw new Error('value: ' + value + ' is not a number')
-    }
-
     this.value = value
   }
 
